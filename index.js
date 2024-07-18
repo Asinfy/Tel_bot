@@ -127,6 +127,11 @@ bot.on("message", async (msg) => {
   const chatId = msg.chat.id;
   const text = msg.text;
   
+  if(!text)
+    {
+      return;
+    }
+    
   // Ignorar el mensaje si es un comando
   if (text.startsWith("/") || text.toLocaleLowerCase() == "hola") return;
 
