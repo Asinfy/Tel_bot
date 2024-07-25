@@ -213,9 +213,10 @@ bot.on("message", async (msg) => {
         const new_cedula = text;
         const validate_billings = await validate_client_balance(new_cedula);
         if (validate_billings.code == 200) {
+          const name_client = validate_billings.data[0].Cliente.zc_display_value.split('-')[0].trim();
           await bot.sendMessage(
             chatId,
-            "Ingresa el valor a abonar (Evite el uso de caracteres especiales, puntos, comas o espacios) $:"
+            `Cliente a abonar: ${name_client} \n Ingresa el valor a abonar (Evite el uso de caracteres especiales, puntos, comas o espacios) $:`
           );
           userData[chatId].state = ASK_VALUE
           userData[chatId].client_id = validate_billings.data[0].Cliente.ID
